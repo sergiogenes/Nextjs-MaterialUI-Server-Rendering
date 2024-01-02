@@ -6,13 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed:local": "ts-node ./src/seeds/index.ts",
+    "seed": "node ./src/seeds/index.js"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.2",
     "@mui/material": "^5.15.2",
+    "aws4": "^1.12.0",
+    "csv-parse": "^5.5.3",
+    "dotenv": "^16.3.1",
+    "mongoose": "^8.0.3",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18"
@@ -23,6 +30,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

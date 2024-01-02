@@ -1,19 +1,16 @@
-'use client'
 import styles from './page.module.css'
-import { Button } from '@mui/material'
 
-export default function Home() {
-  const onClick = () => console.log('click')
+import { getIncidentes } from './lib/getIncidents'
+import ClientButton from '@/components/ClientButton'
+import NavBar from '@/components/NavBar'
 
+export default async function Home() {
+  const incidentes = await getIncidentes()
+  console.log(incidentes)
   return (
     <main className={styles.main}>
-      <Button
-        variant='contained'
-        color='primary'
-        onClick={onClick}
-      >
-        Hello World
-      </Button>
+      <NavBar />
+      <ClientButton />
     </main>
   )
 }
