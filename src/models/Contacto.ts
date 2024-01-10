@@ -1,10 +1,17 @@
 import mongoose, { Model, Schema, Types } from 'mongoose'
 import { ContactoType } from '../interfaces'
+import { IIncidente } from './Incidente'
 
 export interface IContacto extends ContactoType {
   _id: Types.ObjectId
   id: string
   Incidentes: Types.ObjectId[]
+}
+
+export interface IContactoApp extends ContactoType {
+  _id: Types.ObjectId
+  id: string
+  Incidentes: IIncidente[]
 }
 
 // 1. Definición del Schema

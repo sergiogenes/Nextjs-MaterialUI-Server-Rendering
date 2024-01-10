@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
 dotenv.config()
-console.log('URI', process.env.MONGODB_URI)
+// console.log('URI', process.env.MONGODB_URI)
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/zurichdb'
 
 /**

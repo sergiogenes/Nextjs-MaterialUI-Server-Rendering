@@ -1,5 +1,6 @@
 import mongoose, { Model, Schema, Types } from 'mongoose'
 import { IncidenteType } from '../interfaces'
+import { IArchivo, IContacto, ILogActividad, INotaPrivada, IPoliza, IRespuesta, ITarea } from '.'
 
 export interface IIncidente extends IncidenteType {
   _id: Types.ObjectId
@@ -11,6 +12,18 @@ export interface IIncidente extends IncidenteType {
   Log_Actividad: Types.ObjectId[]
   Archivos: Types.ObjectId[]
   Respuestas: Types.ObjectId[]
+}
+
+export interface IIncidenteApp extends IncidenteType {
+  _id: Types.ObjectId
+  id: string
+  Contacto: IContacto
+  Poliza_Incidente: IPoliza
+  Notas_Privadas: INotaPrivada[]
+  Tareas: ITarea[]
+  Log_Actividad: ILogActividad[]
+  Archivos: IArchivo[]
+  Respuestas: IRespuesta[]
 }
 
 // 1. Definición del Schema
