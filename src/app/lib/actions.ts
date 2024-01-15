@@ -1,8 +1,11 @@
 'use server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { unstable_noStore as noStore } from 'next/cache'
 
 export async function findContacs(formData: FormData) {
+  noStore()
+  console.log('finding...')
   const nombre = formData.get('nombre')
   const apellido = formData.get('apellido')
   const dni = formData.get('dni')

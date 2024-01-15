@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box'
-import ClientDataGrid from './ClientDataGrid'
+import ClientDataGrid from './DataGridWithLink'
 import { getContacts } from '@/app/lib/getContacts'
 import { IContacto } from '@/models'
 

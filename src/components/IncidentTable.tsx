@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box'
-import ClientDataGrid from './ClientDataGrid'
+import ClientDataGrid from './DataGridWithLink'
 import { getIncidentes } from '@/app/lib/getIncidents'
 import { IIncidente } from '@/models'
 

@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box'
-import ClientDataGrid from './ClientDataGrid'
+import ClientDataGrid from './DataGridWithLink'
 
 export default async function ListaDeIncidentes({ rows }: { rows: any }) {
   const columns = [

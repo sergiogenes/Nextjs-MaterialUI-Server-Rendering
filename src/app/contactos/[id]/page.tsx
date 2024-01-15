@@ -1,5 +1,5 @@
 import { getContactById } from '@/app/lib/getContacts'
-import ClientDataGrid from '@/components/ClientDataGrid'
+import ClientDataGrid from '@/components/DataGridWithLink'
 import UserCard from '@/components/UserCard'
 
 import { Box, Typography, Divider } from '@mui/material'

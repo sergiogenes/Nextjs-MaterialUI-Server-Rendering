@@ -3,6 +3,12 @@ import * as React from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
+import { IIncidenteApp } from '@/models'
+import NotasPrivadasTable from './NotasPrivadasTable'
+import RespuestasTable from './RespuestasTable'
+import TareasTable from './TareasTable'
+import LogsTable from './LogsTable'
+import ArchivosTable from './ArchivosTable'
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -21,7 +27,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{ p: 1 }}>{children}</Box>}
     </div>
   )
 }
@@ -33,7 +39,11 @@ function a11yProps(index: number) {
   }
 }
 
-export default function TabsIncidentes() {
+interface Props {
+  incidente: IIncidenteApp
+}
+
+export default function TabsIncidentes({ incidente }: Props) {
   const [value, setValue] = React.useState(0)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -62,11 +72,11 @@ export default function TabsIncidentes() {
           />
           <Tab
             label='Logs de Actividad'
-            {...a11yProps(2)}
+            {...a11yProps(3)}
           />
           <Tab
             label='Archivos'
-            {...a11yProps(2)}
+            {...a11yProps(4)}
           />
         </Tabs>
       </Box>
@@ -74,31 +84,31 @@ export default function TabsIncidentes() {
         value={value}
         index={0}
       >
-        <h1>Notas Privadas</h1>
+        <NotasPrivadasTable nota_privada={incidente.Notas_Privadas} />
       </CustomTabPanel>
       <CustomTabPanel
         value={value}
         index={1}
       >
-        Respuestas
+        <RespuestasTable respuestas={incidente.Respuestas} />
       </CustomTabPanel>
       <CustomTabPanel
         value={value}
         index={2}
       >
-        Tareas
+        <TareasTable tareas={incidente.Tareas} />
       </CustomTabPanel>
       <CustomTabPanel
         value={value}
         index={3}
       >
-        Logs de Actividad
+        <LogsTable logs={incidente.Log_Actividad} />
       </CustomTabPanel>
       <CustomTabPanel
         value={value}
         index={4}
       >
-        Archivos
+        <ArchivosTable archivos={incidente.Archivos} />
       </CustomTabPanel>
     </Box>
   )
