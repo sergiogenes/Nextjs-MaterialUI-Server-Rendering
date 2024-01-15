@@ -1,5 +1,4 @@
 'use client'
-import * as React from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
@@ -9,6 +8,8 @@ import RespuestasTable from './RespuestasTable'
 import TareasTable from './TareasTable'
 import LogsTable from './LogsTable'
 import ArchivosTable from './ArchivosTable'
+import { Suspense, useState } from 'react'
+import TableSkeleton from './TableSkeleton'
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -44,7 +45,7 @@ interface Props {
 }
 
 export default function TabsIncidentes({ incidente }: Props) {
-  const [value, setValue] = React.useState(0)
+  const [value, setValue] = useState(0)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
@@ -84,31 +85,41 @@ export default function TabsIncidentes({ incidente }: Props) {
         value={value}
         index={0}
       >
-        <NotasPrivadasTable nota_privada={incidente.Notas_Privadas} />
+        <Suspense fallback={<TableSkeleton />}>
+          <NotasPrivadasTable nota_privada={incidente.Notas_Privadas} />
+        </Suspense>
       </CustomTabPanel>
       <CustomTabPanel
         value={value}
         index={1}
       >
-        <RespuestasTable respuestas={incidente.Respuestas} />
+        <Suspense fallback={<TableSkeleton />}>
+          <RespuestasTable respuestas={incidente.Respuestas} />
+        </Suspense>
       </CustomTabPanel>
       <CustomTabPanel
         value={value}
         index={2}
       >
-        <TareasTable tareas={incidente.Tareas} />
+        <Suspense fallback={<TableSkeleton />}>
+          <TareasTable tareas={incidente.Tareas} />
+        </Suspense>
       </CustomTabPanel>
       <CustomTabPanel
         value={value}
         index={3}
       >
-        <LogsTable logs={incidente.Log_Actividad} />
+        <Suspense fallback={<TableSkeleton />}>
+          <LogsTable logs={incidente.Log_Actividad} />
+        </Suspense>
       </CustomTabPanel>
       <CustomTabPanel
         value={value}
         index={4}
       >
-        <ArchivosTable archivos={incidente.Archivos} />
+        <Suspense fallback={<TableSkeleton />}>
+          <ArchivosTable archivos={incidente.Archivos} />
+        </Suspense>
       </CustomTabPanel>
     </Box>
   )

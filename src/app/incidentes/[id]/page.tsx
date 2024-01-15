@@ -1,10 +1,11 @@
-import Image from 'next/image'
 import { Box, Typography } from '@mui/material'
 
 import { getIncidentById } from '@/app/lib/getIncidents'
-import zurich_image from '../../../../public/zurich_imagen.jpeg'
+
 import TabsIncidentes from '@/components/TabsIncidentes'
 import IncidentCard from '@/components/IncidentCard'
+import { Suspense } from 'react'
+import TableSkeleton from '@/components/TableSkeleton'
 
 interface Props {
   params: {
