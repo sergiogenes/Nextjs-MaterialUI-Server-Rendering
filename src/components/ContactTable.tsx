@@ -1,29 +1,39 @@
 import Box from '@mui/material/Box'
-import ClientDataGrid from './DataGridWithLink'
+import DataGridWithLink from './DataGridWithLink'
 import { getContacts } from '@/app/lib/getContacts'
 import { IContacto } from '@/models'
+import MyAlert from './MyAlert'
 
-export default async function ContactTable({
-  searchParams,
-}: {
+interface Props {
   searchParams?: {
-    nombre?: string
-    apellido?: string
-    dni?: string
-    id_cliente_ais?: string
-    email?: string
-    nro_de_poliza?: string
-    nro_de_siniestro?: string
-    page?: string
+    params?: string
   }
-}) {
-  const nombre = searchParams?.nombre || ''
-  const apellido = searchParams?.apellido || ''
-  const dni = searchParams?.dni || ''
-  const id_cliente_ais = searchParams?.id_cliente_ais || ''
-  const email = searchParams?.email || ''
-  const nro_de_poliza = searchParams?.nro_de_poliza || ''
-  const nro_de_siniestro = searchParams?.nro_de_siniestro || ''
+}
+
+interface UndecodedParams {
+  nombre?: string
+  apellido?: string
+  dni?: string
+  id_cliente_ais?: string
+  email?: string
+  nro_de_poliza?: string
+  nro_de_siniestro?: string
+  page?: string
+}
+
+export default async function ContactTable({ searchParams }: Props) {
+  const codedParams = searchParams?.params || ''
+  const decodedParams = atob(codedParams)
+
+  const params: UndecodedParams = Object.fromEntries(new URLSearchParams(decodedParams))
+
+  const nombre = params?.nombre || ''
+  const apellido = params?.apellido || ''
+  const dni = params?.dni || ''
+  const id_cliente_ais = params?.id_cliente_ais || ''
+  const email = params?.email || ''
+  const nro_de_poliza = params?.nro_de_poliza || ''
+  const nro_de_siniestro = params?.nro_de_siniestro || ''
 
   let contactos: IContacto[] = []
 
@@ -365,11 +375,15 @@ export default async function ContactTable({
 
   return (
     <Box sx={{ height: 400, width: '100%' }}>
-      <ClientDataGrid
-        columns={columns}
-        rows={contactos}
-        urlBase='/contactos'
-      />
+      {contactos.length < 100 ? (
+        <DataGridWithLink
+          columns={columns}
+          rows={contactos}
+          urlBase='/contactos'
+        />
+      ) : (
+        <MyAlert text='La búsqueda devuelve demasiados contactos! Por intente refinar la búsqueda.' />
+      )}
     </Box>
   )
 }

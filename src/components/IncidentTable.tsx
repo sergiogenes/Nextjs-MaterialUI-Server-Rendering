@@ -2,23 +2,34 @@ import Box from '@mui/material/Box'
 import ClientDataGrid from './DataGridWithLink'
 import { getIncidentes } from '@/app/lib/getIncidents'
 import { IIncidente } from '@/models'
+import MyAlert from './MyAlert'
 
 interface Props {
   searchParams?: {
-    nro_incidente?: string
-    producto?: string
-    poliza?: string
-    estado?: string
-    productor?: string
+    params?: string
   }
 }
 
+interface UndecodedParams {
+  nro_incidente?: string
+  producto?: string
+  poliza?: string
+  estado?: string
+  productor?: string
+}
+
 export default async function IncidentTable({ searchParams }: Props) {
-  const nro_incidente = searchParams?.nro_incidente || ''
-  const producto = searchParams?.producto || ''
-  const poliza = searchParams?.poliza || ''
-  const estado = searchParams?.estado || ''
-  const productor = searchParams?.productor || ''
+  const codedParams = searchParams?.params || ''
+  const decodedParams = atob(codedParams)
+  const params: UndecodedParams = Object.fromEntries(new URLSearchParams(decodedParams))
+
+  console.log('params', params)
+
+  const nro_incidente = params?.nro_incidente || ''
+  const producto = params?.producto || ''
+  const poliza = params?.poliza || ''
+  const estado = params?.estado || ''
+  const productor = params?.productor || ''
 
   let incidentes: IIncidente[] = []
 
@@ -274,11 +285,15 @@ export default async function IncidentTable({ searchParams }: Props) {
 
   return (
     <Box sx={{ height: 400, width: '100%' }}>
-      <ClientDataGrid
-        columns={columns}
-        rows={incidentes}
-        urlBase='/incidentes'
-      />
+      {incidentes.length < 100 ? (
+        <ClientDataGrid
+          columns={columns}
+          rows={incidentes}
+          urlBase='/incidentes'
+        />
+      ) : (
+        <MyAlert text='La búsqueda devuelve demasiados incidentes! Por intente refinar la búsqueda.' />
+      )}
     </Box>
   )
 }

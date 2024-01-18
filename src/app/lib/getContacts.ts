@@ -52,9 +52,9 @@ export async function getContacts(query: IQueryContacts, currentPage: number) {
     .then((contactos: IContacto[]) => {
       return contactos
     })
-    .catch((error: MongooseError) => {
+    .catch((error) => {
       console.log(error)
-      return []
+      return error
     })
   await db.disconectDB()
   return contactos
