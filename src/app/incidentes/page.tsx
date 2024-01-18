@@ -23,7 +23,7 @@ export default async function IncidentePage({ searchParams }: Props) {
         m={4}
         variant='h5'
       >
-        Lista de Incidente
+        Lista de Incidentes
       </Typography>
       <IncidentTable searchParams={searchParams} />
     </main>
