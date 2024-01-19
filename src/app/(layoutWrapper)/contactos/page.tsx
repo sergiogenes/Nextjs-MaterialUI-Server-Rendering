@@ -1,4 +1,4 @@
-import styles from '@/app/page.module.css'
+import styles from '@/app/(layoutWrapper)/page.module.css'
 import ContactTable from '@/components/ContactTable'
 import SearchContact from '@/components/SearchContact'
 import { Divider, Typography } from '@mui/material'

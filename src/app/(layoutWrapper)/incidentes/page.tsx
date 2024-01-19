@@ -1,4 +1,4 @@
-import styles from '@/app/page.module.css'
+import styles from '@/app/(layoutWrapper)/page.module.css'
 
 import SearchIncident from '@/components/SearchIncidents'
 import { Divider, Typography } from '@mui/material'
