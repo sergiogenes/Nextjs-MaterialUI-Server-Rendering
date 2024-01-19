@@ -7,14 +7,7 @@ export default async function ContactoPage({
   searchParams,
 }: {
   searchParams?: {
-    nombre?: string
-    apellido?: string
-    dni?: string
-    id_cliente_ais?: string
-    email?: string
-    nro_de_poliza?: string
-    nro_de_siniestro?: string
-    page?: string
+    params?: string
   }
 }) {
   return (
